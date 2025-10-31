@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { UploadXlsx } from "@/components/upload-xlsx"
@@ -192,22 +193,21 @@ export default function ConciliacaoPage() {
           {/* Linha Divisória */}
           <Separator className="my-6 sm:my-8" />
 
-          {/* Seção de Upload de Planilhas */}
-          <div className="space-y-4 sm:space-y-6">
-            {/* Título da Seção */}
-            <div className="space-y-3">
-              <Separator />
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-foreground text-center">
-                Upload de Planilhas
-              </h2>
-              <Separator />
-            </div>
-
-            {/* Grid de Uploads - Lado a lado */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-4 md:gap-6">
+          {/* Grid de Uploads - Lado a lado */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-4 md:gap-6">
               {/* Card de Upload - Extrato Bancário */}
               <Card className="border-border/50 shadow-sm">
-                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50">
+                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50 text-center">
+                  <div className="flex justify-center mb-2">
+                    <Image
+                      src="/bradesco.png"
+                      alt="Logo Bradesco"
+                      width={80}
+                      height={80}
+                      quality={100}
+                      className="h-12 w-auto sm:h-16 sm:w-auto md:h-20 md:w-auto object-contain"
+                    />
+                  </div>
                   <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
                     Extrato Bancário
                   </CardTitle>
@@ -226,7 +226,17 @@ export default function ConciliacaoPage() {
 
               {/* Card de Upload - Relatório Financeiro */}
               <Card className="border-border/50 shadow-sm">
-                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50">
+                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50 text-center">
+                  <div className="flex justify-center mb-2">
+                    <Image
+                      src="/planaltec-logo.png"
+                      alt="Logo Planaltec"
+                      width={80}
+                      height={80}
+                      quality={100}
+                      className="h-12 w-auto sm:h-16 sm:w-auto md:h-20 md:w-auto object-contain"
+                    />
+                  </div>
                   <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
                     Relatório Planaltec do Gerenciador
                   </CardTitle>
@@ -243,7 +253,6 @@ export default function ConciliacaoPage() {
                 </CardContent>
               </Card>
             </div>
-          </div>
 
           {/* Botão de Processamento Global - Só aparece quando ambas as planilhas estão selecionadas */}
           {arquivoExtratoBancario && arquivoRelatorioFinanceiro && (
