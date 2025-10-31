@@ -1,5 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+"use client"
+
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
+import { FileCheck } from "lucide-react"
 
 /**
  * Página do Dashboard
@@ -28,9 +33,9 @@ export default function DashboardPage() {
       "bg-background text-foreground"
     )}>
       <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
-        <div className="mx-auto max-w-7xl space-y-6 sm:space-y-8">
+        <div className="mx-auto max-w-5xl space-y-6 sm:space-y-8">
           {/* Header Section */}
-          <div className="space-y-1.5">
+          <div className="space-y-1.5 text-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
               Dashboard
             </h1>
@@ -39,23 +44,33 @@ export default function DashboardPage() {
             </p>
           </div>
 
+          {/* Linha Divisória */}
+          <Separator className="my-6 sm:my-8" />
+
           {/* Content Cards */}
-          <div className="grid gap-4 sm:gap-6 md:gap-8">
-            <Card className="border-border/50 shadow-sm transition-shadow hover:shadow-md">
-              <CardHeader className="pb-4 p-4 sm:p-6">
-                <CardTitle className="text-lg sm:text-xl font-semibold">
-                  Bem-vindo ao Dashboard
-                </CardTitle>
-                <CardDescription className="text-xs sm:text-sm mt-2">
-                  Você está autenticado no sistema. O dashboard será desenvolvido aqui.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 p-4 sm:p-6">
-                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Conteúdo do dashboard em desenvolvimento...
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            <Link href="/dashboard/lotes-pagamento-europ">
+              <Card className={cn(
+                "border-border/50 shadow-sm transition-all duration-200",
+                "hover:shadow-lg hover:border-border",
+                "cursor-pointer",
+                "aspect-square",
+                "flex flex-col items-center justify-center",
+                "p-4 sm:p-6"
+              )}>
+                <div className="flex-1 flex items-center justify-center mb-4">
+                  <FileCheck className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 text-primary" />
+                </div>
+                <CardHeader className="p-0 text-center">
+                  <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
+                    Relatório de Conciliação
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm mt-2">
+                    Cruze dados bancários com relatórios financeiros
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           </div>
         </div>
       </div>

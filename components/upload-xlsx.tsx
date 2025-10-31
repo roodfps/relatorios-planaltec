@@ -4,7 +4,6 @@ import * as React from "react"
 import { Upload, FileSpreadsheet, X, Loader2, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -245,28 +244,23 @@ export function UploadXlsx({ onFileSelect, onFileRemove, className, desabilitarP
   }
 
   return (
-    <Card className={cn("border-border/50 shadow-sm", className)}>
-      <CardHeader className="pb-4 p-4 sm:p-6">
-        <CardTitle className="text-lg sm:text-xl font-semibold flex items-center gap-2 flex-wrap">
-          <FileSpreadsheet className="h-5 w-5 text-primary flex-shrink-0" />
-          <span className="break-words">Upload de Planilha XLSX</span>
-        </CardTitle>
-        <CardDescription className="text-xs sm:text-sm mt-2">
-          Selecione ou arraste uma planilha Excel (XLSX ou XLS) para fazer o upload
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="pt-0 space-y-4 p-4 sm:p-6">
-        {/* Input de arquivo oculto */}
-        <Input
-          ref={inputRef}
-          type="file"
-          accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
-          onChange={handleInputChange}
-          className="hidden"
-        />
+    <div className={cn("space-y-4", className)}>
+      {/* Descrição */}
+      <p className="text-xs sm:text-sm text-muted-foreground text-center">
+        Selecione ou arraste uma planilha Excel (XLSX ou XLS) para fazer o upload
+      </p>
 
-        {/* Área de upload */}
-        {!arquivoSelecionado ? (
+      {/* Input de arquivo oculto */}
+      <Input
+        ref={inputRef}
+        type="file"
+        accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+        onChange={handleInputChange}
+        className="hidden"
+      />
+
+      {/* Área de upload */}
+      {!arquivoSelecionado ? (
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -380,15 +374,7 @@ export function UploadXlsx({ onFileSelect, onFileRemove, className, desabilitarP
             )}
           </div>
         )}
-
-        {/* Informação adicional */}
-        {!arquivoSelecionado && (
-          <p className="text-xs text-muted-foreground leading-relaxed px-1">
-            <strong>Observação:</strong> Selecione um arquivo e clique em &quot;Confirmar e Processar&quot; para executar o processamento. Os logs aparecerão no console do servidor.
-          </p>
-        )}
-      </CardContent>
-    </Card>
+    </div>
   )
 }
 

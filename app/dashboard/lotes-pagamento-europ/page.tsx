@@ -1,6 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
 import { UploadXlsx } from "@/components/upload-xlsx"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -179,8 +180,8 @@ export default function ConciliacaoPage() {
       <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10">
         <div className="mx-auto max-w-7xl space-y-6 sm:space-y-8">
           {/* Header Section */}
-          <div className="space-y-1.5">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground break-words">
+          <div className="space-y-1.5 text-center">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
               Conciliação
             </h1>
             <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
@@ -188,19 +189,14 @@ export default function ConciliacaoPage() {
             </p>
           </div>
 
+          {/* Linha Divisória */}
+          <Separator className="my-6 sm:my-8" />
+
           {/* Grid de Uploads - Lado a lado */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-4 md:gap-6">
             {/* Card de Upload - Extrato Bancário */}
             <Card className="border-border/50 shadow-sm">
-              <CardHeader className="pb-3 p-3 sm:p-4">
-                <CardTitle className="text-sm sm:text-base font-semibold">
-                  1 - Instituição Financeira
-                </CardTitle>
-                <CardDescription className="text-xs mt-1">
-                  Extrato de movimentações
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 p-3 sm:p-4">
+              <CardContent className="p-3 sm:p-4">
                 <UploadXlsx
                   onFileSelect={handleExtratoBancarioSelecionado}
                   onFileRemove={handleExtratoBancarioRemovido}
@@ -211,15 +207,7 @@ export default function ConciliacaoPage() {
 
             {/* Card de Upload - Relatório Financeiro */}
             <Card className="border-border/50 shadow-sm">
-              <CardHeader className="pb-3 p-3 sm:p-4">
-                <CardTitle className="text-sm sm:text-base font-semibold">
-                  2 - Relatório Financeiro
-                </CardTitle>
-                <CardDescription className="text-xs mt-1">
-                  Técnico Do Gerenciador da Planaltec
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 p-3 sm:p-4">
+              <CardContent className="p-3 sm:p-4">
                 <UploadXlsx
                   onFileSelect={handleRelatorioFinanceiroSelecionado}
                   onFileRemove={handleRelatorioFinanceiroRemovido}
