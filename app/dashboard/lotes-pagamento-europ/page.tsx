@@ -117,10 +117,37 @@ export default function ConciliacaoPage() {
       if (response.ok && resultado.sucesso) {
         console.log('[ConciliacaoPage] Conciliação concluída com sucesso:', resultado)
         
-        toast.success('Conciliação concluída', {
-          description: resultado.mensagem || 'Planilhas processadas com sucesso. Verifique os logs do backend.',
-          duration: 5000
-        })
+        // Se houver planilha de irregulares, oferece download
+        if (resultado.relatorio?.planilhaIrregulares) {
+          // Cria blob do arquivo Excel
+          const base64Data = resultado.relatorio.planilhaIrregulares
+          const binaryString = atob(base64Data)
+          const bytes = new Uint8Array(binaryString.length)
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i)
+          }
+          const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+          
+          // Cria link para download
+          const url = window.URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = url
+          link.download = `irregulares-conciliacao-${new Date().toISOString().split('T')[0]}.xlsx`
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          window.URL.revokeObjectURL(url)
+          
+          toast.success('Conciliação concluída - Planilha de irregulares baixada', {
+            description: resultado.mensagem || 'Planilhas processadas com sucesso. Planilha de irregulares foi baixada automaticamente.',
+            duration: 5000
+          })
+        } else {
+          toast.success('Conciliação concluída', {
+            description: resultado.mensagem || 'Planilhas processadas com sucesso. Verifique os logs do backend.',
+            duration: 5000
+          })
+        }
 
         // Remove os arquivos após processamento bem-sucedido
         setArquivoExtratoBancario(null)

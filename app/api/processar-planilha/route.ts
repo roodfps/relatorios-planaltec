@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { writeFile, unlink, readFile } from "fs/promises"
+import { writeFile, unlink } from "fs/promises"
 import { join } from "path"
 import { tmpdir } from "os"
 import * as XLSX from "xlsx"
@@ -183,48 +183,18 @@ async function processarConciliacao(extratoBancario: File, relatorioFinanceiro: 
         cellDates: true
       })
       
-      // Tenta carregar instruções dos modelos (se existirem)
-      let instrucoesExtrato = null
-      let instrucoesRelatorio = null
-      
-      try {
-        const nomeBaseExtrato = nomeExtrato.replace(/\.[^/.]+$/, "")
-        const caminhoInstrucoesExtrato = join(process.cwd(), 'lib/scripts/detector-modelo', `instrucoes-${nomeBaseExtrato}.json`)
-        const instrucoesExtratoStr = await readFile(caminhoInstrucoesExtrato, 'utf8').catch(() => null)
-        if (instrucoesExtratoStr) {
-          instrucoesExtrato = JSON.parse(instrucoesExtratoStr)
-          console.log(`[PROCESSAR-PLANILHA] Instruções do extrato carregadas: ${caminhoInstrucoesExtrato}`)
-        }
-      } catch (erro) {
-        console.log(`[PROCESSAR-PLANILHA] Instruções do extrato não encontradas, usando detecção automática`)
-      }
-      
-      try {
-        const nomeBaseRelatorio = nomeRelatorio.replace(/\.[^/.]+$/, "")
-        const caminhoInstrucoesRelatorio = join(process.cwd(), 'lib/scripts/detector-modelo', `instrucoes-${nomeBaseRelatorio}.json`)
-        const instrucoesRelatorioStr = await readFile(caminhoInstrucoesRelatorio, 'utf8').catch(() => null)
-        if (instrucoesRelatorioStr) {
-          instrucoesRelatorio = JSON.parse(instrucoesRelatorioStr)
-          console.log(`[PROCESSAR-PLANILHA] Instruções do relatório carregadas: ${caminhoInstrucoesRelatorio}`)
-        }
-      } catch (erro) {
-        console.log(`[PROCESSAR-PLANILHA] Instruções do relatório não encontradas, usando detecção automática`)
-      }
-      
       // Realiza a conciliação usando o script modular
       console.log(`[PROCESSAR-PLANILHA] Iniciando conciliação com script modular...`)
-      const relatorioConciliacao = realizarConciliacao(
+      const relatorioConciliacao = await realizarConciliacao(
         bufferExtrato,
-        bufferRelatorio,
-        instrucoesExtrato,
-        instrucoesRelatorio
+        bufferRelatorio
       )
       
-      // Log de sucesso
+      // Log de sucesso com informações corretas
       const mensagemSucesso = `Conciliação concluída com sucesso. ` +
-        `Encontrados: ${relatorioConciliacao.resumo.encontrados}, ` +
-        `Não encontrados no extrato: ${relatorioConciliacao.resumo.naoEncontradosNoExtrato}, ` +
-        `Não encontrados no relatório: ${relatorioConciliacao.resumo.naoEncontradosNoRelatorio}, ` +
+        `Encontrados: ${relatorioConciliacao.resumo.totalEncontrados}, ` +
+        `Não encontrados no extrato: ${relatorioConciliacao.resumo.naoEncontradosNoExtrato.quantidade} (R$ ${relatorioConciliacao.resumo.naoEncontradosNoExtrato.valorTotal.toFixed(2)}), ` +
+        `Não encontrados no relatório: ${relatorioConciliacao.resumo.naoEncontradosNoRelatorio.quantidade} (R$ ${relatorioConciliacao.resumo.naoEncontradosNoRelatorio.valorTotal.toFixed(2)}), ` +
         `Taxa de conciliação: ${relatorioConciliacao.resumo.taxaConciliacao}`
       
       console.log(`[PROCESSAR-PLANILHA] ${mensagemSucesso}`)
@@ -235,12 +205,23 @@ async function processarConciliacao(extratoBancario: File, relatorioFinanceiro: 
       console.log(`[PROCESSAR-PLANILHA] Arquivos temporários excluídos com sucesso`)
       
       // Retorna resultado da conciliação
-      return NextResponse.json({
+      // Se houver planilha de irregulares, inclui na resposta
+      const resposta = {
         sucesso: true,
         tipo: 'conciliacao',
         mensagem: mensagemSucesso,
-        relatorio: relatorioConciliacao
-      }, { status: 200 })
+        relatorio: {
+          ...relatorioConciliacao,
+          planilhaIrregulares: relatorioConciliacao.planilhaIrregulares || null
+        }
+      }
+      
+      // Remove o buffer base64 do objeto relatorio para não enviar no JSON (muito grande)
+      if (resposta.relatorio.planilhaIrregulares) {
+        console.log(`[PROCESSAR-PLANILHA] Planilha de irregulares incluída na resposta`)
+      }
+      
+      return NextResponse.json(resposta, { status: 200 })
       
     } catch (erroProcessamento) {
       // Tenta excluir arquivos temporários em caso de erro
