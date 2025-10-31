@@ -192,29 +192,57 @@ export default function ConciliacaoPage() {
           {/* Linha Divisória */}
           <Separator className="my-6 sm:my-8" />
 
-          {/* Grid de Uploads - Lado a lado */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-4 md:gap-6">
-            {/* Card de Upload - Extrato Bancário */}
-            <Card className="border-border/50 shadow-sm">
-              <CardContent className="p-3 sm:p-4">
-                <UploadXlsx
-                  onFileSelect={handleExtratoBancarioSelecionado}
-                  onFileRemove={handleExtratoBancarioRemovido}
-                  desabilitarProcessamento={true}
-                />
-              </CardContent>
-            </Card>
+          {/* Seção de Upload de Planilhas */}
+          <div className="space-y-4 sm:space-y-6">
+            {/* Título da Seção */}
+            <div className="space-y-3">
+              <Separator />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-foreground text-center">
+                Upload de Planilhas
+              </h2>
+              <Separator />
+            </div>
 
-            {/* Card de Upload - Relatório Financeiro */}
-            <Card className="border-border/50 shadow-sm">
-              <CardContent className="p-3 sm:p-4">
-                <UploadXlsx
-                  onFileSelect={handleRelatorioFinanceiroSelecionado}
-                  onFileRemove={handleRelatorioFinanceiroRemovido}
-                  desabilitarProcessamento={true}
-                />
-              </CardContent>
-            </Card>
+            {/* Grid de Uploads - Lado a lado */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-4 md:gap-6">
+              {/* Card de Upload - Extrato Bancário */}
+              <Card className="border-border/50 shadow-sm">
+                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50">
+                  <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
+                    Extrato Bancário
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm mt-1">
+                    Instituição Financeira - Extrato de movimentações
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-4 p-3 sm:p-4">
+                  <UploadXlsx
+                    onFileSelect={handleExtratoBancarioSelecionado}
+                    onFileRemove={handleExtratoBancarioRemovido}
+                    desabilitarProcessamento={true}
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Card de Upload - Relatório Financeiro */}
+              <Card className="border-border/50 shadow-sm">
+                <CardHeader className="pb-3 p-4 sm:p-5 border-b border-border/50">
+                  <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
+                    Relatório Planaltec do Gerenciador
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm mt-1">
+                    Relatório Financeiro Técnico Do Gerenciador da Planaltec
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="pt-4 p-3 sm:p-4">
+                  <UploadXlsx
+                    onFileSelect={handleRelatorioFinanceiroSelecionado}
+                    onFileRemove={handleRelatorioFinanceiroRemovido}
+                    desabilitarProcessamento={true}
+                  />
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           {/* Botão de Processamento Global - Só aparece quando ambas as planilhas estão selecionadas */}

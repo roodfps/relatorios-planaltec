@@ -155,17 +155,29 @@ export function Sidebar() {
         "z-30 transition-all duration-300 ease-in-out"
       )}>
         <SidebarNav />
+        {/* Rodapé da Sidebar */}
+        <div className="mt-auto px-6 py-4 border-t border-sidebar-border/50">
+          <p className="text-[10px] sm:text-xs text-sidebar-foreground/50 text-center leading-relaxed">
+            © 2025 Planaltec. Todos os direitos reservados.
+          </p>
+        </div>
       </aside>
 
       {/* Versão Mobile - Sheet lateral */}
       <Sheet open={aberto} onOpenChange={setAberto}>
-        <SheetContent side="left" className="w-[280px] p-0">
+        <SheetContent side="left" className="w-[280px] p-0 flex flex-col">
           <SheetHeader className="p-6 pb-4 border-b border-border">
             <SheetTitle className="text-left text-lg font-semibold">
               Menu
             </SheetTitle>
           </SheetHeader>
           <SidebarNav onNavigate={() => setAberto(false)} />
+          {/* Rodapé da Sidebar Mobile */}
+          <div className="mt-auto px-6 py-4 border-t border-sidebar-border/50">
+            <p className="text-[10px] sm:text-xs text-sidebar-foreground/50 text-center leading-relaxed">
+              © 2025 Planaltec. Todos os direitos reservados.
+            </p>
+          </div>
         </SheetContent>
       </Sheet>
     </>

@@ -49,26 +49,40 @@ export default function DashboardPage() {
 
           {/* Content Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            <Link href="/dashboard/lotes-pagamento-europ">
+            <Link href="/dashboard/lotes-pagamento-europ" className="group">
               <Card className={cn(
-                "border-border/50 shadow-sm transition-all duration-200",
-                "hover:shadow-lg hover:border-border",
+                "border-border/50 shadow-sm transition-all duration-300 ease-out",
+                "hover:shadow-xl hover:border-primary/50 hover:bg-accent/30",
+                "hover:scale-[1.02] active:scale-[0.98]",
                 "cursor-pointer",
                 "aspect-square",
                 "flex flex-col items-center justify-center",
-                "p-4 sm:p-6"
+                "p-4 sm:p-6",
+                "relative overflow-hidden"
               )}>
-                <div className="flex-1 flex items-center justify-center mb-4">
-                  <FileCheck className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 text-primary" />
+                {/* Indicador visual de clique */}
+                <div className={cn(
+                  "absolute top-2 right-2 opacity-0 group-hover:opacity-100",
+                  "transition-opacity duration-300",
+                  "text-xs text-muted-foreground"
+                )}>
+                  Clique para abrir →
+                </div>
+
+                <div className="flex-1 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <FileCheck className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 text-primary group-hover:text-primary/80 transition-colors duration-300" />
                 </div>
                 <CardHeader className="p-0 text-center">
-                  <CardTitle className="text-base sm:text-lg md:text-xl font-semibold">
+                  <CardTitle className="text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors duration-300">
                     Relatório de Conciliação
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm mt-2">
                     Cruze dados bancários com relatórios financeiros
                   </CardDescription>
                 </CardHeader>
+                <p className="text-[10px] sm:text-xs text-muted-foreground/60 text-center mt-3 pt-3 border-t border-border/30">
+                  Clique para redirecionar
+                </p>
               </Card>
             </Link>
           </div>
