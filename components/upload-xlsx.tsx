@@ -384,7 +384,7 @@ export function UploadXlsx({ onFileSelect, onFileRemove, className, desabilitarP
         {/* Informação adicional */}
         {!arquivoSelecionado && (
           <p className="text-xs text-muted-foreground leading-relaxed px-1">
-            <strong>Observação:</strong> Selecione um arquivo e clique em "Confirmar e Processar" para executar o processamento. Os logs aparecerão no console do servidor.
+            <strong>Observação:</strong> Selecione um arquivo e clique em &quot;Confirmar e Processar&quot; para executar o processamento. Os logs aparecerão no console do servidor.
           </p>
         )}
       </CardContent>
