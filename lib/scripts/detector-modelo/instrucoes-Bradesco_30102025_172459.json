@@ -1,0 +1,119 @@
+{
+  "arquivo": "Bradesco_30102025_172459.XLS",
+  "dataDetecao": "2025-10-31T19:47:17.173Z",
+  "totalPlanilhas": 1,
+  "planilhas": [
+    {
+      "nome": "Sheet0",
+      "totalLinhas": 485,
+      "totalColunas": 6,
+      "colunas": [
+        {
+          "nome": "__EMPTY",
+          "tipo": "data_texto",
+          "formato": "data",
+          "totalValores": 478,
+          "valoresUnicos": 7,
+          "exemplos": [
+            "Extrato de: Agência: 513  Conta: 19952-4",
+            "Data",
+            "28/10/2025",
+            "29/10/2025",
+            "30/10/2025"
+          ],
+          "distribuicaoTipos": {
+            "texto": 2,
+            "codigo": 3,
+            "data_texto": 473
+          }
+        },
+        {
+          "nome": "__EMPTY_1",
+          "tipo": "texto",
+          "formato": null,
+          "totalValores": 476,
+          "valoresUnicos": 361,
+          "exemplos": [
+            "Bradesco Net Empresa",
+            "Lançamento",
+            "SALDO ANTERIOR",
+            "DEVOLUCAO PIX REM: GEOVANI PEREIRA COUTO 29/10",
+            "TRANSFERENCIA PIX REM: Camila Sousa Magela d 29/10"
+          ],
+          "distribuicaoTipos": {
+            "texto": 476
+          }
+        },
+        {
+          "nome": "__EMPTY_2",
+          "tipo": "numero_texto",
+          "formato": "numero: 856279 a 1741382",
+          "totalValores": 474,
+          "valoresUnicos": 474,
+          "exemplos": [
+            "Dcto.",
+            "1614494",
+            "1100590",
+            "1139277",
+            "1144216"
+          ],
+          "distribuicaoTipos": {
+            "texto": 3,
+            "numero_texto": 471
+          }
+        },
+        {
+          "nome": "__EMPTY_3",
+          "tipo": "texto",
+          "formato": null,
+          "totalValores": 8,
+          "valoresUnicos": 8,
+          "exemplos": [
+            "Crédito (R$)",
+            "60,00",
+            "125,00",
+            "47.000,00",
+            "45.000,00"
+          ],
+          "distribuicaoTipos": {
+            "texto": 8
+          }
+        },
+        {
+          "nome": "__EMPTY_4",
+          "tipo": "texto",
+          "formato": null,
+          "totalValores": 467,
+          "valoresUnicos": 100,
+          "exemplos": [
+            "Débito (R$)",
+            "-150,00",
+            "-129,94",
+            "-177,00",
+            "-200,00"
+          ],
+          "distribuicaoTipos": {
+            "texto": 467
+          }
+        },
+        {
+          "nome": "__EMPTY_5",
+          "tipo": "texto",
+          "formato": null,
+          "totalValores": 474,
+          "valoresUnicos": 472,
+          "exemplos": [
+            "Saldo (R$)",
+            "44.164,63",
+            "44.224,63",
+            "44.349,63",
+            "91.349,63"
+          ],
+          "distribuicaoTipos": {
+            "texto": 474
+          }
+        }
+      ]
+    }
+  ]
+}
