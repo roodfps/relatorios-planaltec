@@ -91,7 +91,8 @@ export default function LoginPage() {
       "flex min-h-screen",
       "flex-col items-center justify-center",
       "p-4 sm:p-6 md:p-8",
-      "bg-background text-foreground"
+      "bg-background text-foreground",
+      "relative"
     )}>
       <Card className="w-full max-w-md mx-auto">
         <CardHeader className="space-y-4 text-center">
@@ -99,7 +100,7 @@ export default function LoginPage() {
             <Lock className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
           </div>
           <CardTitle className="text-2xl sm:text-3xl">
-            Bem-vindo ao Sistema
+            Bem-vindo
           </CardTitle>
           <CardDescription className="text-base sm:text-lg">
             Sistema de Relatórios Planaltec
@@ -142,6 +143,13 @@ export default function LoginPage() {
           </form>
         </CardContent>
       </Card>
+
+      {/* Rodapé */}
+      <div className="absolute bottom-4 left-0 right-0 px-4">
+        <p className="text-[10px] sm:text-xs text-muted-foreground/60 text-center leading-relaxed">
+          © 2025 Planaltec. Todos os direitos reservados.
+        </p>
+      </div>
     </main>
   )
 }

@@ -70,7 +70,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="flex-1 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <FileCheck className="h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 text-primary group-hover:text-primary/80 transition-colors duration-300" />
+                  <FileCheck className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 text-primary group-hover:text-primary/80 transition-colors duration-300" />
                 </div>
                 <CardHeader className="p-0 text-center">
                   <CardTitle className="text-base sm:text-lg md:text-xl font-semibold group-hover:text-primary transition-colors duration-300">
