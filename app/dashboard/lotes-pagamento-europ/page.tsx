@@ -140,8 +140,7 @@ export default function ConciliacaoPage() {
           document.body.removeChild(link)
           window.URL.revokeObjectURL(url)
           
-          toast.success('Conciliação concluída - Planilha de irregulares baixada', {
-            description: resultado.mensagem || 'Planilhas processadas com sucesso. Planilha de irregulares foi baixada automaticamente.',
+          toast.success('Relatório gerado com sucesso. Acesse sua pasta de Downloads do seu navegador.', {
             duration: 5000
           })
         } else {
